@@ -1,0 +1,2 @@
+C:\VisualStudio\Pong_SFML\Src\x64\Debug\Src.exe
+C:\VisualStudio\Pong_SFML\Src\Debug\Src.exe
