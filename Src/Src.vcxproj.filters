@@ -21,9 +21,27 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Paddle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Paddle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

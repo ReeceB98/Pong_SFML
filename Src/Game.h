@@ -2,23 +2,37 @@
 
 #include "SFML/Graphics.hpp"
 
+#include "Player1.h"
+#include "Player2.h"
+
 class Game
 {
 public:
 
+	// Constructor & Destructor
 	Game();
-    ~Game();
+	~Game();
+
+	// Opens the window and runs the game
 	void Run();
 
 private:
 
-    void processEvents();
-    void update(sf::Time deltaTime);
-    void render();
-    void handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
+	// Renders 2d objects to the screen
+	sf::RenderWindow *window;
 
-    sf::RenderWindow *mWindow;
+	// Used to set up inputs
+	sf::Event event;
 
-    static const sf::Time TimePerFrame;
+	// Initialize, Updates, handles game inputs and renders sprites to the screen
+	void Initialize();
+	void Update();
+	void HandleInputs();
+	void Render();
+
+	// Paddles
+	//Paddle playerOnePaddle;
+	Player1 player1;
+	Player2 player2;
 };
 

@@ -1,81 +1,68 @@
 #include "Game.h"
 
-const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
-
-Game::Game()
-    : mWindow(nullptr)
+// Constructor
+Game::Game() :
+	window(window = new sf::RenderWindow(sf::VideoMode(600, 600), "SFML works!")), event(event)
 {
-    mWindow = new sf::RenderWindow(sf::VideoMode(600, 600), "Pong");
 }
 
+// Destructor
 Game::~Game()
 {
-    delete mWindow;
+	delete window;
 }
 
+// Opens the window and runs the game
 void Game::Run()
 {
-    sf::Clock clock;
-    sf::Time timeSinceLastUpdate = sf::Time::Zero;
-
-    while (mWindow->isOpen())
-    {
-        timeSinceLastUpdate += clock.restart();
-        while (timeSinceLastUpdate > TimePerFrame)
-        {
-            timeSinceLastUpdate -= TimePerFrame;
-            processEvents();
-            update(TimePerFrame);
-        }
-        render();
-    }
+	while (window->isOpen())
+	{
+		Initialize();
+		Update();
+		HandleInputs();
+		Render();
+	}
 }
 
-void Game::processEvents()
+// Intialize any data needed for game objects
+void Game::Initialize()
 {
-    sf::Event event{};
+	//playerOnePaddle.SetTexture();
+	//playerOnePaddle.SetSprite();
+	//playerOnePaddle.SetPosition(100.0f, 100.0f);
 
-    while (mWindow->pollEvent(event))
-    {
-        switch (event.type)
-        {
-        case sf::Event::KeyPressed:
-            handlePlayerInput(event.key.code, true);
-            break;
-        case sf::Event::KeyReleased:
-            handlePlayerInput(event.key.code, false);
-            break;
-        case sf::Event::Closed:
-            mWindow->close();
-            break;
-        default:
-            break;
-        }
+	player1.SetTexture();
+	player1.SetSprite();
+	player1.SetPosition(100.0f, 100.0f);
 
-    }
+	player2.SetTexture();
+	player2.SetSprite();
+	player2.SetPosition(400.0f, 400.0f);
 }
 
-void Game::update(sf::Time deltaTime)
+// Updates anything in the window by frame
+void Game::Update()
 {
-    // TODO: Update your objects here
-    // Example: mWindow.draw(mPlayer);
+	
 }
 
-void Game::render()
+// Handle game inputs 
+void Game::HandleInputs()
 {
-    mWindow->clear();
-
-    // TODO: Draw your objects here
-
-    mWindow->display();
+	while (window->pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed)
+			window->close();
+	}
 }
 
-void Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
+// Render any sprites to the window screen
+void Game::Render()
 {
-    // TODO: Key events for your game
-    // Example:
-    // if (key == sf::Keyboard::W)
-    // {
-    // mIsMovingUp = isPressed;
-    // }
+	window->clear();
+	// Render between the lines
+	window->draw(player1.GetSprite());
+	window->draw(player2.GetSprite());
+	// Render between the lines
+	window->display();
 }
