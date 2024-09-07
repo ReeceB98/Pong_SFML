@@ -1,5 +1,6 @@
 #include "Game.h"
-
+float speed = 0;
+//sf::Clock clock;
 // Constructor
 Game::Game() :
 	window(window = new sf::RenderWindow(sf::VideoMode(600, 600), "SFML works!")), event(event)
@@ -15,35 +16,36 @@ Game::~Game()
 // Opens the window and runs the game
 void Game::Run()
 {
+	Initialize();
 	while (window->isOpen())
 	{
-		Initialize();
 		Update();
 		HandleInputs();
 		Render();
 	}
+
 }
 
 // Intialize any data needed for game objects
 void Game::Initialize()
 {
-	//playerOnePaddle.SetTexture();
-	//playerOnePaddle.SetSprite();
-	//playerOnePaddle.SetPosition(100.0f, 100.0f);
+	playerOne.SetTexture();
+	playerOne.SetSprite();
+	playerOne.SetPosition(100.0f, 100.0f);
 
-	player1.SetTexture();
-	player1.SetSprite();
-	player1.SetPosition(100.0f, 100.0f);
-
-	player2.SetTexture();
-	player2.SetSprite();
-	player2.SetPosition(400.0f, 400.0f);
+	playerTwo.SetTexture();
+	playerTwo.SetSprite();
+	playerTwo.SetPosition(400.0f, 400.0f);
 }
 
 // Updates anything in the window by frame
 void Game::Update()
 {
-	
+	float deltaTime = clock.restart().asSeconds();
+	//player1.SetMove();
+	//playerOne.GetSprite().move(0.0f, speed);
+	//playerOne.Move(0.0f, playerOne.SetSpeed(-1.0f));
+	playerOne.Move(deltaTime);
 }
 
 // Handle game inputs 
@@ -53,6 +55,16 @@ void Game::HandleInputs()
 	{
 		if (event.type == sf::Event::Closed)
 			window->close();
+
+		if (event.type == sf::Event::KeyPressed)
+		{
+			playerOne.ProcessEvents(event.key.code, true);
+		}
+
+		if (event.type == sf::Event::KeyReleased)
+		{
+			playerOne.ProcessEvents(event.key.code, false);
+		}
 	}
 }
 
@@ -61,8 +73,9 @@ void Game::Render()
 {
 	window->clear();
 	// Render between the lines
-	window->draw(player1.GetSprite());
-	window->draw(player2.GetSprite());
+	//window->draw(playerOne.GetSprite());
+	playerOne.Render(*window);
+	playerTwo.Render(*window);
 	// Render between the lines
 	window->display();
 }

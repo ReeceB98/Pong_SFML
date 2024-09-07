@@ -2,8 +2,7 @@
 
 #include "SFML/Graphics.hpp"
 
-#include "Player1.h"
-#include "Player2.h"
+#include "Paddle.h"
 
 class Game
 {
@@ -31,8 +30,9 @@ private:
 	void Render();
 
 	// Paddles
-	//Paddle playerOnePaddle;
-	Player1 player1;
-	Player2 player2;
+	Paddle playerOne;
+	Paddle playerTwo;
+
+	sf::Clock clock;
 };
 

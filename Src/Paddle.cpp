@@ -33,7 +33,56 @@ void Paddle::SetPosition(float x, float y)
 	sprite->setPosition(x, y);
 }
 
+void Paddle::SetScale(float x, float y)
+{
+	sprite->setScale(x, y);
+}
+
 sf::Sprite Paddle::GetSprite()
 {
 	return *sprite;
+}
+
+void Paddle::Render(sf::RenderWindow& window)
+{
+	window.draw(*sprite);
+}
+
+void Paddle::Move(float dt)
+{
+	if (up)
+	{
+		movement.y = -100.0f;
+	}
+	else if (down)
+	{
+		movement.y = 100.0f;
+	}
+
+	sprite->move(movement * dt);
+}
+
+float Paddle::SetSpeed(float currentSpeed)
+{
+	return speed;
+}
+
+void Paddle::ProcessEvents(sf::Keyboard::Key key, bool checkPressed)
+{
+	if (checkPressed)
+	{
+		if (key == sf::Keyboard::W)
+		{
+			up = true;
+		}
+		else if (key == sf::Keyboard::S)
+		{
+			down = true;
+		}
+	}
+	else if (!checkPressed)
+	{
+		up = false;
+		down = false;
+	}
 }
