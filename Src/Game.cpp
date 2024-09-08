@@ -3,7 +3,7 @@ float speed = 0;
 //sf::Clock clock;
 // Constructor
 Game::Game() :
-	window(window = new sf::RenderWindow(sf::VideoMode(600, 600), "SFML works!")), event(event)
+	window(window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "SFML works!")), event(event)
 {
 }
 
@@ -17,6 +17,7 @@ Game::~Game()
 void Game::Run()
 {
 	Initialize();
+
 	while (window->isOpen())
 	{
 		Update();
@@ -29,23 +30,21 @@ void Game::Run()
 // Intialize any data needed for game objects
 void Game::Initialize()
 {
-	playerOne.SetTexture();
-	playerOne.SetSprite();
-	playerOne.SetPosition(100.0f, 100.0f);
+	player1.SetTexture();
+	player1.SetSprite();
+	player1.SetPosition(100.0f, 500.0f);
+	player1.SetScale(2.0f, 2.0f);
 
-	playerTwo.SetTexture();
-	playerTwo.SetSprite();
-	playerTwo.SetPosition(400.0f, 400.0f);
+	player2.SetTexture();
+	player2.SetSprite();
+	player2.SetPosition(1800.0f, 500.0f);
+	player2.SetScale(2.0f, 2.0f);
 }
 
 // Updates anything in the window by frame
 void Game::Update()
 {
-	float deltaTime = clock.restart().asSeconds();
-	//player1.SetMove();
-	//playerOne.GetSprite().move(0.0f, speed);
-	//playerOne.Move(0.0f, playerOne.SetSpeed(-1.0f));
-	playerOne.Move(deltaTime);
+	player1.ConstrainPaddle(*window, windowWidth, windowHeight);
 }
 
 // Handle game inputs 
@@ -55,16 +54,24 @@ void Game::HandleInputs()
 	{
 		if (event.type == sf::Event::Closed)
 			window->close();
+	}
 
-		if (event.type == sf::Event::KeyPressed)
-		{
-			playerOne.ProcessEvents(event.key.code, true);
-		}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		player1.MoveUp();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		player1.MoveDown();
+	}
 
-		if (event.type == sf::Event::KeyReleased)
-		{
-			playerOne.ProcessEvents(event.key.code, false);
-		}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		player2.MoveUp();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		player2.MoveDown();
 	}
 }
 
@@ -73,9 +80,8 @@ void Game::Render()
 {
 	window->clear();
 	// Render between the lines
-	//window->draw(playerOne.GetSprite());
-	playerOne.Render(*window);
-	playerTwo.Render(*window);
+	player1.Render(*window);
+	player2.Render(*window);
 	// Render between the lines
 	window->display();
 }

@@ -2,7 +2,8 @@
 
 #include "SFML/Graphics.hpp"
 
-#include "Paddle.h"
+#include "Player1.h"
+#include "Player2.h"
 
 class Game
 {
@@ -19,6 +20,8 @@ private:
 
 	// Renders 2d objects to the screen
 	sf::RenderWindow *window;
+	unsigned int windowWidth = 1920;
+	unsigned int windowHeight = 1080;
 
 	// Used to set up inputs
 	sf::Event event;
@@ -30,9 +33,7 @@ private:
 	void Render();
 
 	// Paddles
-	Paddle playerOne;
-	Paddle playerTwo;
-
-	sf::Clock clock;
+	Player1 player1;
+	Player2 player2;
 };
 
