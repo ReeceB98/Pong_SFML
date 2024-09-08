@@ -44,7 +44,8 @@ void Game::Initialize()
 // Updates anything in the window by frame
 void Game::Update()
 {
-	player1.ConstrainPaddle(*window, windowWidth, windowHeight);
+	player1.ConstrainPaddle();
+	player2.ConstrainPaddle();
 }
 
 // Handle game inputs 

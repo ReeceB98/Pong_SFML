@@ -53,20 +53,16 @@ void Player1::MoveDown()
 	sprite->move(0.0f, speed);
 }
 
-void Player1::ConstrainPaddle(sf::RenderWindow& window, int width, int height)
+void Player1::ConstrainPaddle()
 {
 	std::cout << sprite->getPosition().y << std::endl;
 	if (sprite->getPosition().y < 0)
 	{
-		std::cout << "Collison\n";
-		//speed = 0.0f;
 		sprite->setPosition(100.0f, 1.0f);
 	}
 	
 	if (sprite->getPosition().y > 1015)
 	{
-		std::cout << "Collison\n";
-		//speed = 0.0f;
 		sprite->setPosition(100.0f, 1015.0f);
 	}
 }

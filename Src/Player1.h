@@ -22,7 +22,7 @@ public:
 	void MoveUp();
 	void MoveDown();
 
-	void ConstrainPaddle(sf::RenderWindow& window, int width, int height);
+	void ConstrainPaddle();
 
 private:
 
@@ -30,7 +30,7 @@ private:
 	sf::Texture* texture;
 	sf::Sprite* sprite;
 
-	float speed = 0.4f;
+	float speed = 1.0f;
 	sf::Vector2f movement;
 
 	bool up = false;

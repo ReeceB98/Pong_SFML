@@ -23,13 +23,15 @@ public:
 	void MoveUp();
 	void MoveDown();
 
+	void ConstrainPaddle();
+
 private:
 
 	// Texture and Sprite values for paddle
 	sf::Texture* texture;
 	sf::Sprite* sprite;
 
-	float speed = 0.4f;
+	float speed = 1.0f;
 	sf::Vector2f movement;
 
 	bool up = false;
