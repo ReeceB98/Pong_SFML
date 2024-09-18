@@ -55,7 +55,7 @@ void Player2::MoveDown()
 
 void Player2::ConstrainPaddle()
 {
-	std::cout << sprite->getPosition().y << std::endl;
+	//std::cout << sprite->getPosition().y << std::endl;
 	if (sprite->getPosition().y < 0)
 	{
 		sprite->setPosition(1800.0f, 1.0f);

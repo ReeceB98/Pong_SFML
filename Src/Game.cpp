@@ -1,6 +1,5 @@
 #include "Game.h"
-float speed = 0;
-//sf::Clock clock;
+
 // Constructor
 Game::Game() :
 	window(window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "SFML works!")), event(event)
@@ -39,6 +38,8 @@ void Game::Initialize()
 	player2.SetSprite();
 	player2.SetPosition(1800.0f, 500.0f);
 	player2.SetScale(2.0f, 2.0f);
+
+	ball.Initialize();
 }
 
 // Updates anything in the window by frame
@@ -46,6 +47,7 @@ void Game::Update()
 {
 	player1.ConstrainPaddle();
 	player2.ConstrainPaddle();
+	ball.Move(*window);
 }
 
 // Handle game inputs 
@@ -83,6 +85,7 @@ void Game::Render()
 	// Render between the lines
 	player1.Render(*window);
 	player2.Render(*window);
+	ball.Render(*window);
 	// Render between the lines
 	window->display();
 }

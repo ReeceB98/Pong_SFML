@@ -4,6 +4,7 @@
 
 #include "Player1.h"
 #include "Player2.h"
+#include "Ball.h"
 
 class Game
 {
@@ -35,5 +36,8 @@ private:
 	// Paddles
 	Player1 player1;
 	Player2 player2;
+
+	// Ball
+	Ball ball;
 };
 
