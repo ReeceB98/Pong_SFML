@@ -5,6 +5,7 @@
 #include "Player1.h"
 #include "Player2.h"
 #include "Ball.h"
+#include "Score.h"
 
 class Game
 {
@@ -39,6 +40,10 @@ private:
 
 	// Ball
 	Ball ball;
+
+	// Score
+	Score player1Score;
+	Score player2Score;
 
 	int currentScene = 1;
 	enum sceneName {MENU, GAMEPLAY, ENDSCREEN};

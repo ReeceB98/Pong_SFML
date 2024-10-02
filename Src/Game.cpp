@@ -29,6 +29,14 @@ void Game::Initialize()
 	player1.Initialize();
 	player2.Initialize();
 	ball.Initialize();
+	//score.Initialize();
+	player1Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+	player1Score.SetText("0");
+	player1Score.SetPosition(0.0f, 0.0f);
+
+	player2Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+	player2Score.SetText("1");
+	player2Score.SetPosition(100.0f, 0.0f);
 }
 
 // Updates anything in the window by frame
@@ -158,6 +166,9 @@ void Game::Render()
 		player1.Render(*window);
 		player2.Render(*window);
 		ball.Render(*window);
+		//score.Render(*window);
+		player1Score.Render(*window);
+		player2Score.Render(*window);
 	}
 	// Render between the lines
 	window->display();
