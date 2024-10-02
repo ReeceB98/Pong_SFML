@@ -18,7 +18,9 @@ void Ball::Initialize()
 	SetTexture();
 	SetSprite();
 	SetPosition(950, 500);
-	SetInitVelocity(0.5f, -0.5f);
+	//SetPosition(100, 500);
+	SetScale(1.0f, 1.0f);
+	SetInitVelocity(1.0f, 0.0f);
 }
 
 // Sets the texture for the ball sprite from file
@@ -40,6 +42,11 @@ void Ball::SetSprite()
 void Ball::SetPosition(float x, float y)
 {
 	sprite->setPosition(x, y);
+}
+
+void Ball::SetScale(float x, float y)
+{
+	sprite->setScale(x, y);
 }
 
 // Initial velocity at start up
@@ -85,4 +92,46 @@ void Ball::Move(sf::RenderWindow& window)
 void Ball::Render(sf::RenderWindow& window)
 {
 	window.draw(*sprite);
+}
+
+sf::FloatRect Ball::BallBounds()
+{
+	return sprite->getGlobalBounds();
+}
+
+void Ball::SetBallVelocity(float x, float y)
+{
+	ballVelocity.x = x;
+	ballVelocity.y = y;
+}
+
+const sf::Vector2f Ball::GetPosition()
+{
+	return sprite->getPosition();
+}
+
+const sf::Vector2f Ball::GetScale()
+{
+	return sprite->getScale();
+}
+
+void Ball::GetBallVelocityX(float normDiff)
+{
+	ballVelocity.x = normDiff * 0.01f;
+}
+
+void Ball::GetBallVelocityY()
+{
+	ballVelocity.y = -ballVelocity.y;
+}
+
+sf::Vector2f Ball::GetBallVelocity()
+{
+	return ballVelocity;
+}
+
+void Ball::SetVelocity(float x, float y)
+{
+	ballVelocity.x = x;
+	ballVelocity.y = y;
 }

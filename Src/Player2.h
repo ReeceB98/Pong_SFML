@@ -12,6 +12,8 @@ public:
 	Player2();
 	~Player2();
 
+	void Initialize();
+
 	// Set the texture and sprite of paddle
 	void SetTexture();
 	void SetSprite();
@@ -24,6 +26,10 @@ public:
 	void MoveDown();
 
 	void ConstrainPaddle();
+	sf::FloatRect PaddleBounds();
+
+	const sf::Vector2f GetPosition();
+	const sf::Vector2f GetScale();
 
 private:
 

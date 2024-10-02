@@ -13,6 +13,14 @@ Player2::~Player2()
 	delete sprite;
 }
 
+void Player2::Initialize()
+{
+	SetTexture();
+	SetSprite();
+	SetPosition(1800.0f, 500.0f);
+	SetScale(4.0f, 4.0f);
+}
+
 // Set the texture for the paddle
 void Player2::SetTexture()
 {
@@ -65,4 +73,19 @@ void Player2::ConstrainPaddle()
 	{
 		sprite->setPosition(1800.0f, 1015.0f);
 	}
+}
+
+sf::FloatRect Player2::PaddleBounds()
+{
+	return sprite->getGlobalBounds();
+}
+
+const sf::Vector2f Player2::GetPosition()
+{
+	return sprite->getPosition();
+}
+
+const sf::Vector2f Player2::GetScale()
+{
+	return sprite->getScale();
 }

@@ -18,12 +18,24 @@ public:
 	void Move(sf::RenderWindow& window);
 	void Render(sf::RenderWindow& window);
 
+	sf::FloatRect BallBounds();
+	void SetBallVelocity(float x, float y);
+
+	const sf::Vector2f GetPosition();
+	const sf::Vector2f GetScale();
+
+	void GetBallVelocityX(float normDiff);
+	void GetBallVelocityY();
+	sf::Vector2f GetBallVelocity();
+	void SetVelocity(float x, float y);
+
 private:
 
 	// Property functions to define the ball sprite
 	void SetTexture();
 	void SetSprite();
 	void SetPosition(float x, float y);
+	void SetScale(float x, float y);
 	void SetInitVelocity(float x, float y);
 
 	// Variables

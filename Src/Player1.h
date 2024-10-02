@@ -11,6 +11,7 @@ public:
 	Player1();
 	~Player1();
 
+	void Initialize();
 	// Set the texture and sprite of paddle
 	void SetTexture();
 	void SetSprite();
@@ -23,6 +24,10 @@ public:
 	void MoveDown();
 
 	void ConstrainPaddle();
+	sf::FloatRect PaddleBounds();
+
+	const sf::Vector2f GetPosition();
+	const sf::Vector2f GetScale();
 
 private:
 
@@ -37,5 +42,6 @@ private:
 	bool down = false;
 	bool left = false;
 	bool right = false;
+
 };
 

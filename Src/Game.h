@@ -39,5 +39,8 @@ private:
 
 	// Ball
 	Ball ball;
+
+	int currentScene = 1;
+	enum sceneName {MENU, GAMEPLAY, ENDSCREEN};
 };
 
