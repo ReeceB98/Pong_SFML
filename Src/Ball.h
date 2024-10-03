@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "Player1.h"
+#include "Score.h"
 
 #include "SFML/Graphics.hpp"
 
@@ -44,5 +44,6 @@ private:
 
 	sf::Vector2f ballVelocity;
 	sf::Vector2f ballPosition;
+
 };
 

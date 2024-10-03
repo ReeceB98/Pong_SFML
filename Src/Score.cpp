@@ -34,6 +34,17 @@ void Score::SetPosition(float x, float y)
 	text->setPosition(x, y);
 }
 
+void Score::SetCharacterSize(float size)
+{
+	text->setCharacterSize(size);
+}
+
+void Score::SetScore()
+{
+	score++;
+	text->setString(std::to_string(score));
+}
+
 void Score::Render(sf::RenderWindow& window)
 {
 	window.draw(*text);

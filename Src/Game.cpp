@@ -29,14 +29,16 @@ void Game::Initialize()
 	player1.Initialize();
 	player2.Initialize();
 	ball.Initialize();
-	//score.Initialize();
+
 	player1Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 	player1Score.SetText("0");
-	player1Score.SetPosition(0.0f, 0.0f);
+	player1Score.SetPosition(700.0f, 0.0f);
+	player1Score.SetCharacterSize(120.0f);
 
 	player2Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
-	player2Score.SetText("1");
-	player2Score.SetPosition(100.0f, 0.0f);
+	player2Score.SetText("0");
+	player2Score.SetPosition(1100.0f, 0.0f);
+	player2Score.SetCharacterSize(120.0f);
 }
 
 // Updates anything in the window by frame
@@ -106,6 +108,16 @@ void Game::Update()
 				ball.SetVelocity(-1.0f, 0.4f);
 			}
 
+		}
+
+		// Updates the score based on which player has scored
+		if (ball.GetPosition().x <= 0.0f)
+		{
+			player2Score.SetScore();
+		}
+		else if (ball.GetPosition().x >= 1920)
+		{
+			player1Score.SetScore();
 		}
 	}
 }
