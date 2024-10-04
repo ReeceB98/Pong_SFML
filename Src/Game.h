@@ -47,5 +47,11 @@ private:
 
 	int currentScene = 1;
 	enum sceneName {MENU, GAMEPLAY, ENDSCREEN};
+
+	sf::Clock clock;
+	sf::Time time;
+
+	bool player1Scored = false;
+	bool player2Scored = false;
 };
 

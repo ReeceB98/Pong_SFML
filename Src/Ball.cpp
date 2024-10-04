@@ -64,14 +64,14 @@ void Ball::Move(sf::RenderWindow& window)
 
 	// Detects if the ball hit the left or right side of the wall
 	// Will bounce if collision happens
-	if (ballPosition.x <= 0.0f)
-	{
-		ballVelocity.x = -ballVelocity.x;
-	}
-	else if (ballPosition.x >= 1920.0f)
-	{
-		ballVelocity.x = -ballVelocity.x;
-	}
+	//if (ballPosition.x <= 0.0f)
+	//{
+	//	ballVelocity.x = -ballVelocity.x;
+	//}
+	//else if (ballPosition.x >= 1920.0f)
+	//{
+	//	ballVelocity.x = -ballVelocity.x;
+	//}
 
 	// Detects if the ball hit the top or bottom of the wall
 	// Will bounce if collision happens

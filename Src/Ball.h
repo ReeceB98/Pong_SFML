@@ -29,12 +29,14 @@ public:
 	sf::Vector2f GetBallVelocity();
 	void SetVelocity(float x, float y);
 
+	void SetPosition(float x, float y);
+
 private:
 
 	// Property functions to define the ball sprite
 	void SetTexture();
 	void SetSprite();
-	void SetPosition(float x, float y);
+	//void SetPosition(float x, float y);
 	void SetScale(float x, float y);
 	void SetInitVelocity(float x, float y);
 

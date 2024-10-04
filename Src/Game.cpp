@@ -46,6 +46,9 @@ void Game::Update()
 {
 	if (currentScene == GAMEPLAY)
 	{
+
+		//time = clock.getElapsedTime();
+
 		// Stops both paddles from going off the window screen
 		player1.ConstrainPaddle();
 		player2.ConstrainPaddle();
@@ -114,10 +117,39 @@ void Game::Update()
 		if (ball.GetPosition().x <= 0.0f)
 		{
 			player2Score.SetScore();
+			ball.SetBallVelocity(0.0f, 0.0f);
+			ball.SetPosition(950.0f, 500.0f);
+			player2Scored = true;
+			clock.restart();
 		}
 		else if (ball.GetPosition().x >= 1920)
 		{
 			player1Score.SetScore();
+			ball.SetBallVelocity(0.0f, 0.0f);
+			ball.SetPosition(950.0f, 500.0f);
+			player1Scored = true;
+			clock.restart();
+		}
+
+		if (player1Scored)
+		{
+			time = clock.getElapsedTime();
+
+			if (time.asSeconds() > 3.0f)
+			{
+				player1Scored = false;
+				ball.SetBallVelocity(-1.0f, 0.0f);
+			}
+		}
+		else if (player2Scored)
+		{
+			time = clock.getElapsedTime();
+
+			if (time.asSeconds() >= 3.0f)
+			{
+				player2Scored = false;
+				ball.SetBallVelocity(1.0f, 0.0f);
+			}
 		}
 	}
 }
