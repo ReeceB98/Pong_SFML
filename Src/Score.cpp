@@ -45,6 +45,11 @@ void Score::SetScore()
 	text->setString(std::to_string(score));
 }
 
+int Score::GetScore()
+{
+	return score;
+}
+
 void Score::Render(sf::RenderWindow& window)
 {
 	window.draw(*text);

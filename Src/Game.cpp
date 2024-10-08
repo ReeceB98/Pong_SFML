@@ -26,6 +26,19 @@ void Game::Run()
 // Intialize any data needed for game objects
 void Game::Initialize()
 {
+	if (currentScene == MENU)
+	{
+		playButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		playButton.SetText("Play");
+		playButton.SetCharacterSize(120);
+		playButton.SetPosition(700.0f, 400.0f);
+
+		quitButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		quitButton.SetText("Quit");
+		quitButton.SetCharacterSize(120);
+		quitButton.SetPosition(700.0f, 700.0f);
+	}
+
 	player1.Initialize();
 	player2.Initialize();
 	ball.Initialize();
@@ -44,11 +57,41 @@ void Game::Initialize()
 // Updates anything in the window by frame
 void Game::Update()
 {
+	if (currentScene == MENU)
+	{
+		sf::Vector2i localPos = sf::Mouse::getPosition(*window);
+
+		if (playButton.GetTextBounds().contains(localPos.x, localPos.y))
+		{
+			playButton.SetTextColour(sf::Color::Yellow);
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				currentScene = GAMEPLAY;
+			}
+		}
+		else
+		{
+			playButton.SetTextColour(sf::Color::White);
+		}
+
+		if (quitButton.GetTextBounds().contains(localPos.x, localPos.y))
+		{
+			quitButton.SetTextColour(sf::Color::Yellow);
+
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				window->close();
+			}
+		}
+		else
+		{
+			quitButton.SetTextColour(sf::Color::White);
+		}
+	}
+
 	if (currentScene == GAMEPLAY)
 	{
-
-		//time = clock.getElapsedTime();
-
 		// Stops both paddles from going off the window screen
 		player1.ConstrainPaddle();
 		player2.ConstrainPaddle();
@@ -110,7 +153,6 @@ void Game::Update()
 			{
 				ball.SetVelocity(-1.0f, 0.4f);
 			}
-
 		}
 
 		// Updates the score based on which player has scored
@@ -120,6 +162,8 @@ void Game::Update()
 			ball.SetBallVelocity(0.0f, 0.0f);
 			ball.SetPosition(950.0f, 500.0f);
 			player2Scored = true;
+			player1.SetPosition(100.0f, 500.0f);
+			player2.SetPosition(1800.0f, 500.0f);
 			clock.restart();
 		}
 		else if (ball.GetPosition().x >= 1920)
@@ -128,6 +172,8 @@ void Game::Update()
 			ball.SetBallVelocity(0.0f, 0.0f);
 			ball.SetPosition(950.0f, 500.0f);
 			player1Scored = true;
+			player1.SetPosition(100.0f, 500.0f);
+			player2.SetPosition(1800.0f, 500.0f);
 			clock.restart();
 		}
 
@@ -135,7 +181,7 @@ void Game::Update()
 		{
 			time = clock.getElapsedTime();
 
-			if (time.asSeconds() > 3.0f)
+			if (time.asSeconds() > 1.0f)
 			{
 				player1Scored = false;
 				ball.SetBallVelocity(-1.0f, 0.0f);
@@ -145,11 +191,16 @@ void Game::Update()
 		{
 			time = clock.getElapsedTime();
 
-			if (time.asSeconds() >= 3.0f)
+			if (time.asSeconds() >= 1.0f)
 			{
 				player2Scored = false;
 				ball.SetBallVelocity(1.0f, 0.0f);
 			}
+		}
+
+		if (player1Score.GetScore() == 7 || player2Score.GetScore() == 7)
+		{
+			currentScene = ENDSCREEN;
 		}
 	}
 }
@@ -157,13 +208,14 @@ void Game::Update()
 // Handle game inputs 
 void Game::HandleInputs()
 {
+	while (window->pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed)
+			window->close();
+	}
+
 	if (currentScene == GAMEPLAY)
 	{
-		while (window->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window->close();
-		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
@@ -183,21 +235,6 @@ void Game::HandleInputs()
 			player2.MoveDown();
 		}
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		currentScene = 0;
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		currentScene = 1;
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
-	{
-		currentScene = 2;
-	}
 }
 
 // Render any sprites to the window screen
@@ -205,6 +242,12 @@ void Game::Render()
 {
 	window->clear();
 	// Render between the lines
+	if (currentScene == MENU)
+	{
+		playButton.Render(*window);
+		quitButton.Render(*window);
+	}
+
 	if (currentScene == GAMEPLAY)
 	{
 		player1.Render(*window);

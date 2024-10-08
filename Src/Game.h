@@ -6,6 +6,7 @@
 #include "Player2.h"
 #include "Ball.h"
 #include "Score.h"
+#include "Menu.h"
 
 class Game
 {
@@ -45,7 +46,7 @@ private:
 	Score player1Score;
 	Score player2Score;
 
-	int currentScene = 1;
+	int currentScene = 0;
 	enum sceneName {MENU, GAMEPLAY, ENDSCREEN};
 
 	sf::Clock clock;
@@ -53,5 +54,8 @@ private:
 
 	bool player1Scored = false;
 	bool player2Scored = false;
+
+	Menu playButton;
+	Menu quitButton;
 };
 

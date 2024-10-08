@@ -17,6 +17,7 @@ public:
 	void SetPosition(float x, float y);
 	void SetCharacterSize(float size);
 	void SetScore();
+	int GetScore();
 	void Render(sf::RenderWindow& window);
 
 private:
