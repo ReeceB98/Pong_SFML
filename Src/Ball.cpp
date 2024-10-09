@@ -20,7 +20,7 @@ void Ball::Initialize()
 	SetPosition(950, 500);
 	//SetPosition(100, 500);
 	SetScale(1.0f, 1.0f);
-	SetInitVelocity(1.0f, 0.0f);
+	SetInitVelocity(-1.0f, 0.0f);
 }
 
 // Sets the texture for the ball sprite from file
@@ -42,6 +42,22 @@ void Ball::SetSprite()
 void Ball::SetPosition(float x, float y)
 {
 	sprite->setPosition(x, y);
+}
+
+void Ball::StartBall(sf::Time time, sf::Clock clock, bool startTime)
+{
+	if (isStarting)
+	{
+		time = clock.getElapsedTime();
+		std::cout << time.asSeconds() << std::endl;
+
+		if (time.asSeconds() >= 5.0f)
+		{
+			SetBallVelocity(-1.0f, 0.0f);
+		}
+
+		isStarting = false;
+	}
 }
 
 void Ball::SetScale(float x, float y)

@@ -17,6 +17,7 @@ public:
 	void SetSprite();
 	void SetPosition(float x, float y);
 	void SetScale(float x, float y);
+	void SetSpeed(float currentSpeed);
 
 	// Get paddle sprite to render to window
 	void Render(sf::RenderWindow& window);

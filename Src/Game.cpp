@@ -26,8 +26,6 @@ void Game::Run()
 // Intialize any data needed for game objects
 void Game::Initialize()
 {
-	if (currentScene == MENU)
-	{
 		playButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		playButton.SetText("Play");
 		playButton.SetCharacterSize(120);
@@ -37,21 +35,39 @@ void Game::Initialize()
 		quitButton.SetText("Quit");
 		quitButton.SetCharacterSize(120);
 		quitButton.SetPosition(700.0f, 700.0f);
-	}
 
-	player1.Initialize();
-	player2.Initialize();
-	ball.Initialize();
+		playAgainButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		playAgainButton.SetText("Play Again");
+		playAgainButton.SetCharacterSize(120);
+		playAgainButton.SetPosition(400.0f, 700.0f);
+		playAgainButton.SetTextColour(sf::Color::Transparent);
 
-	player1Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
-	player1Score.SetText("0");
-	player1Score.SetPosition(700.0f, 0.0f);
-	player1Score.SetCharacterSize(120.0f);
+		playerOneWins.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		playerOneWins.SetText("Player 1 Wins");
+		playerOneWins.SetCharacterSize(120);
+		playerOneWins.SetPosition(300.0f, 200.0f);
+		playerOneWins.SetTextColour(sf::Color::Transparent);
 
-	player2Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
-	player2Score.SetText("0");
-	player2Score.SetPosition(1100.0f, 0.0f);
-	player2Score.SetCharacterSize(120.0f);
+		playerTwoWins.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		playerTwoWins.SetText("Player 2 Wins");
+		playerTwoWins.SetCharacterSize(120);
+		playerTwoWins.SetPosition(300.0f, 200.0f);
+		playerTwoWins.SetTextColour(sf::Color::Transparent);
+	
+		player1.Initialize();
+		player2.Initialize();
+		ball.Initialize();
+
+		player1Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		player1Score.SetText("0");
+		player1Score.SetPosition(700.0f, 0.0f);
+		player1Score.SetCharacterSize(120.0f);
+
+		player2Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		player2Score.SetText("0");
+		player2Score.SetPosition(1100.0f, 0.0f);
+		player2Score.SetCharacterSize(120.0f);
+	
 }
 
 // Updates anything in the window by frame
@@ -68,6 +84,7 @@ void Game::Update()
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
 				currentScene = GAMEPLAY;
+				startTimer = true;
 			}
 		}
 		else
@@ -92,6 +109,7 @@ void Game::Update()
 
 	if (currentScene == GAMEPLAY)
 	{
+
 		// Stops both paddles from going off the window screen
 		player1.ConstrainPaddle();
 		player2.ConstrainPaddle();
@@ -181,7 +199,7 @@ void Game::Update()
 		{
 			time = clock.getElapsedTime();
 
-			if (time.asSeconds() > 1.0f)
+			if (time.asSeconds() >= 1.0f)
 			{
 				player1Scored = false;
 				ball.SetBallVelocity(-1.0f, 0.0f);
@@ -198,9 +216,62 @@ void Game::Update()
 			}
 		}
 
-		if (player1Score.GetScore() == 7 || player2Score.GetScore() == 7)
+		if (player1Score.GetScore() == 7)
 		{
-			currentScene = ENDSCREEN;
+			playerOneWins.SetTextColour(sf::Color::White);
+			playAgainButton.SetTextColour(sf::Color::White);
+
+			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
+
+			if (playAgainButton.GetTextBounds().contains(localPos.x, localPos.y))
+			{
+				playAgainButton.SetTextColour(sf::Color::Yellow);
+
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				{
+					currentScene = GAMEPLAY;
+					startTimer = true;
+				}
+			}
+			else
+			{
+				playAgainButton.SetTextColour(sf::Color::White);
+			}
+
+			ball.SetVelocity(0.0f, 0.0f);
+			player1.SetPosition(100.0f, 500.0f);
+			player1.SetSpeed(0.0f);
+			player2.SetPosition(1800.0f, 500.0f);
+			player2.SetSpeed(0.0f);
+		}
+
+		if (player2Score.GetScore() == 7)
+		{
+			playerTwoWins.SetTextColour(sf::Color::White);
+			playAgainButton.SetTextColour(sf::Color::White);
+
+			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
+
+			if (playAgainButton.GetTextBounds().contains(localPos.x, localPos.y))
+			{
+				playAgainButton.SetTextColour(sf::Color::Yellow);
+
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+				{
+					currentScene = GAMEPLAY;
+					startTimer = true;
+				}
+			}
+			else
+			{
+				playAgainButton.SetTextColour(sf::Color::White);
+			}
+
+			ball.SetVelocity(0.0f, 0.0f);
+			player1.SetPosition(100.0f, 500.0f);
+			player1.SetSpeed(0.0f);
+			player2.SetPosition(1800.0f, 500.0f);
+			player2.SetSpeed(0.0f);
 		}
 	}
 }
@@ -253,9 +324,11 @@ void Game::Render()
 		player1.Render(*window);
 		player2.Render(*window);
 		ball.Render(*window);
-		//score.Render(*window);
 		player1Score.Render(*window);
 		player2Score.Render(*window);
+		playerOneWins.Render(*window);
+		playerTwoWins.Render(*window);
+		playAgainButton.Render(*window);
 	}
 	// Render between the lines
 	window->display();

@@ -57,5 +57,10 @@ private:
 
 	Menu playButton;
 	Menu quitButton;
+	Menu playerOneWins;
+	Menu playerTwoWins;
+	Menu playAgainButton;
+
+	bool startTimer = false;
 };
 

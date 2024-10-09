@@ -46,6 +46,11 @@ void Player2::SetScale(float x, float y)
 	sprite->setScale(x, y);
 }
 
+void Player2::SetSpeed(float currentSpeed)
+{
+	speed = currentSpeed;
+}
+
 void Player2::Render(sf::RenderWindow& window)
 {
 	window.draw(*sprite);

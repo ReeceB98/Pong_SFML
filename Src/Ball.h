@@ -31,6 +31,8 @@ public:
 
 	void SetPosition(float x, float y);
 
+	void StartBall(sf::Time time, sf::Clock clock, bool startTime);
+
 private:
 
 	// Property functions to define the ball sprite
@@ -47,5 +49,6 @@ private:
 	sf::Vector2f ballVelocity;
 	sf::Vector2f ballPosition;
 
+	bool isStarting = true;
 };
 
