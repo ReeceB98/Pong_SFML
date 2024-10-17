@@ -1,4 +1,5 @@
 #pragma once
+#include <random>
 
 #include "SFML/Graphics.hpp"
 
@@ -21,6 +22,7 @@ public:
 
 private:
 
+	bool test = false;
 	// Renders 2d objects to the screen
 	sf::RenderWindow *window;
 	unsigned int windowWidth = 1920;
@@ -55,6 +57,7 @@ private:
 	bool player1Scored = false;
 	bool player2Scored = false;
 
+	Menu title;
 	Menu playButton;
 	Menu quitButton;
 	Menu playerOneWins;

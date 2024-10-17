@@ -18,7 +18,7 @@ void Player2::Initialize()
 	SetTexture();
 	SetSprite();
 	SetPosition(1800.0f, 500.0f);
-	SetScale(4.0f, 4.0f);
+	SetScale(6.0f, 6.0f);
 }
 
 // Set the texture for the paddle

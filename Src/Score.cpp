@@ -50,6 +50,11 @@ int Score::GetScore()
 	return score;
 }
 
+void Score::ResetScore()
+{
+	score = 0;
+}
+
 void Score::Render(sf::RenderWindow& window)
 {
 	window.draw(*text);

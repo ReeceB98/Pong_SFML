@@ -18,6 +18,7 @@ public:
 	void SetCharacterSize(float size);
 	void SetScore();
 	int GetScore();
+	void ResetScore();
 	void Render(sf::RenderWindow& window);
 
 private:

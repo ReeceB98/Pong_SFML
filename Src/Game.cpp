@@ -1,5 +1,11 @@
 #include "Game.h"
 
+std::random_device rd;
+std::mt19937 gen(rd());
+std::uniform_real_distribution<> negativeDis(-0.8f, -0.2f);
+std::uniform_real_distribution<> positiveDis(0.2f, 0.8f);
+std::uniform_real_distribution<> middleDis(-0.1f, 0.1f);
+
 // Constructor
 Game::Game() :
 	window(window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "SFML works!")), event(event){}
@@ -26,15 +32,20 @@ void Game::Run()
 // Intialize any data needed for game objects
 void Game::Initialize()
 {
+		title.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
+		title.SetText("Pong");
+		title.SetCharacterSize(160);
+		title.SetPosition(600.0f, 100.0f);
+
 		playButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		playButton.SetText("Play");
 		playButton.SetCharacterSize(120);
-		playButton.SetPosition(700.0f, 400.0f);
+		playButton.SetPosition(725.0f, 400.0f);
 
 		quitButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		quitButton.SetText("Quit");
 		quitButton.SetCharacterSize(120);
-		quitButton.SetPosition(700.0f, 700.0f);
+		quitButton.SetPosition(725.0f, 700.0f);
 
 		playAgainButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		playAgainButton.SetText("Play Again");
@@ -73,6 +84,10 @@ void Game::Initialize()
 // Updates anything in the window by frame
 void Game::Update()
 {
+	float negativeRandNum = negativeDis(gen);
+	float positiveRandNum = positiveDis(gen);
+	float middleRandNum = middleDis(gen);
+
 	if (currentScene == MENU)
 	{
 		sf::Vector2i localPos = sf::Mouse::getPosition(*window);
@@ -129,19 +144,19 @@ void Game::Update()
 			float normalizedDifference = difference / (player1.GetScale().x / 2.0f);
 
 			// if the ball hits the top of paddle, ball will go upwards
-			if (normalizedDifference >= -7.5f && normalizedDifference < 24.5)
+			if (normalizedDifference >= -7.0f && normalizedDifference < 16.0f)
 			{
-				ball.SetVelocity(1.0f, -0.4f);
+				ball.SetVelocity(1.0f, negativeRandNum);
 			}
 			// if the ball hits the middle of paddle ball
-			else if (normalizedDifference >= 24.5 && normalizedDifference < 34.5)
+			else if (normalizedDifference >= 16.0f && normalizedDifference < 41.0f)
 			{
-				ball.SetVelocity(1.0f, -0.1f);
+				ball.SetVelocity(1.0f, middleRandNum);
 			}
 			// if the ball hits the bottom of the paddle, ball goes downwards
-			else if (normalizedDifference >= 34.5 && normalizedDifference <= 63)
+			else if (normalizedDifference >= 41.0f && normalizedDifference <= 64)
 			{
-				ball.SetVelocity(1.0f, 0.4f);
+				ball.SetVelocity(1.0f, positiveRandNum);
 			}
 		}
 
@@ -157,19 +172,19 @@ void Game::Update()
 			float normalizedDifference = difference / (player2.GetScale().x / 2.0f);
 
 			// if the ball hits the top of paddle, ball will go upwards
-			if (normalizedDifference >= -7.5f && normalizedDifference < 24.5)
+			if (normalizedDifference >= -7.0f && normalizedDifference < 16.0f)
 			{
-				ball.SetVelocity(-1.0f, -0.4f);
+				ball.SetVelocity(-1.0f, negativeRandNum);
 			}
 			// if the ball hits the middle of paddle ball
-			else if (normalizedDifference >= 24.5 && normalizedDifference < 34.5)
+			else if (normalizedDifference >= 16.0f && normalizedDifference < 41.0f)
 			{
-				ball.SetVelocity(-1.0f, -0.1f);
+				ball.SetVelocity(-1.0f, middleRandNum);
 			}
 			// if the ball hits the bottom of the paddle, ball goes downwards
-			else if (normalizedDifference >= 34.5 && normalizedDifference <= 63)
+			else if (normalizedDifference >= 41.0f && normalizedDifference <= 64)
 			{
-				ball.SetVelocity(-1.0f, 0.4f);
+				ball.SetVelocity(-1.0f, positiveRandNum);
 			}
 		}
 
@@ -221,6 +236,12 @@ void Game::Update()
 			playerOneWins.SetTextColour(sf::Color::White);
 			playAgainButton.SetTextColour(sf::Color::White);
 
+			ball.SetVelocity(0.0f, 0.0f);
+			player1.SetPosition(100.0f, 500.0f);
+			player1.SetSpeed(0.0f);
+			player2.SetPosition(1800.0f, 500.0f);
+			player2.SetSpeed(0.0f);
+
 			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
 
 			if (playAgainButton.GetTextBounds().contains(localPos.x, localPos.y))
@@ -229,20 +250,22 @@ void Game::Update()
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
-					currentScene = GAMEPLAY;
 					startTimer = true;
+					player1Score.SetText("0");
+					player2Score.SetText("0");
+					playerOneWins.SetTextColour(sf::Color::Transparent);
+					playAgainButton.SetTextColour(sf::Color::Transparent);
+					player1Score.ResetScore();
+					player2Score.ResetScore();
+					ball.SetVelocity(-1.0f, 0.0f);
+					player1.SetSpeed(1.0f);
+					player2.SetSpeed(1.0f);
 				}
 			}
 			else
 			{
 				playAgainButton.SetTextColour(sf::Color::White);
 			}
-
-			ball.SetVelocity(0.0f, 0.0f);
-			player1.SetPosition(100.0f, 500.0f);
-			player1.SetSpeed(0.0f);
-			player2.SetPosition(1800.0f, 500.0f);
-			player2.SetSpeed(0.0f);
 		}
 
 		if (player2Score.GetScore() == 7)
@@ -250,6 +273,12 @@ void Game::Update()
 			playerTwoWins.SetTextColour(sf::Color::White);
 			playAgainButton.SetTextColour(sf::Color::White);
 
+			ball.SetVelocity(0.0f, 0.0f);
+			player1.SetPosition(100.0f, 500.0f);
+			player1.SetSpeed(0.0f);
+			player2.SetPosition(1800.0f, 500.0f);
+			player2.SetSpeed(0.0f);
+
 			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
 
 			if (playAgainButton.GetTextBounds().contains(localPos.x, localPos.y))
@@ -258,20 +287,22 @@ void Game::Update()
 
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 				{
-					currentScene = GAMEPLAY;
 					startTimer = true;
+					player1Score.SetText("0");
+					player2Score.SetText("0");
+					playerTwoWins.SetTextColour(sf::Color::Transparent);
+					playAgainButton.SetTextColour(sf::Color::Transparent);
+					player1Score.ResetScore();
+					player2Score.ResetScore();
+					ball.SetVelocity(-1.0f, 0.0f);
+					player1.SetSpeed(1.0f);
+					player2.SetSpeed(1.0f);
 				}
 			}
 			else
 			{
 				playAgainButton.SetTextColour(sf::Color::White);
 			}
-
-			ball.SetVelocity(0.0f, 0.0f);
-			player1.SetPosition(100.0f, 500.0f);
-			player1.SetSpeed(0.0f);
-			player2.SetPosition(1800.0f, 500.0f);
-			player2.SetSpeed(0.0f);
 		}
 	}
 }
@@ -315,6 +346,7 @@ void Game::Render()
 	// Render between the lines
 	if (currentScene == MENU)
 	{
+		title.Render(*window);
 		playButton.Render(*window);
 		quitButton.Render(*window);
 	}

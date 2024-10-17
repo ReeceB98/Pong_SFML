@@ -17,9 +17,8 @@ void Ball::Initialize()
 {
 	SetTexture();
 	SetSprite();
-	SetPosition(950, 500);
-	//SetPosition(100, 500);
-	SetScale(1.0f, 1.0f);
+	SetPosition(950, 575);
+	SetScale(1.2f, 1.2f);
 	SetInitVelocity(-1.0f, 0.0f);
 }
 
