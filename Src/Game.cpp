@@ -26,56 +26,72 @@ void Game::Run()
 // Intialize any data needed for game objects
 void Game::Initialize()
 {
+		// Main title on menu screen
 		title.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		title.SetText("Pong");
 		title.SetCharacterSize(160);
 		title.SetPosition(600.0f, 100.0f);
 
+		// Play button on menu screen
 		playButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		playButton.SetText("Play");
 		playButton.SetCharacterSize(120);
 		playButton.SetPosition(725.0f, 400.0f);
 
+		// Quit button on menu screen
 		quitButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		quitButton.SetText("Quit");
 		quitButton.SetCharacterSize(120);
 		quitButton.SetPosition(725.0f, 700.0f);
 
+		// Play again button on gameplay screen
 		playAgainButton.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		playAgainButton.SetText("Play Again");
 		playAgainButton.SetCharacterSize(120);
 		playAgainButton.SetPosition(400.0f, 700.0f);
 		playAgainButton.SetTextColour(sf::Color::Transparent);
 
+		// Play one wins text on gameplay screen
 		playerOneWins.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		playerOneWins.SetText("Player 1 Wins");
 		playerOneWins.SetCharacterSize(120);
 		playerOneWins.SetPosition(300.0f, 200.0f);
 		playerOneWins.SetTextColour(sf::Color::Transparent);
 
+		// Play two wins text on gameplay screen
 		playerTwoWins.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		playerTwoWins.SetText("Player 2 Wins");
 		playerTwoWins.SetCharacterSize(120);
 		playerTwoWins.SetPosition(300.0f, 200.0f);
 		playerTwoWins.SetTextColour(sf::Color::Transparent);
 
+		// Player 1 paddle
 		playerOne.SetTexture("C:/VisualStudio/Pong_SFML/Src/Paddle.png");
 		playerOne.SetSprite();
 		playerOne.SetPosition(100.0f, 500.0f);
 		playerOne.SetScale(6.0f, 6.0f);
 
+		// Player 2 paddle
 		playerTwo.SetTexture("C:/VisualStudio/Pong_SFML/Src/Paddle.png");
 		playerTwo.SetSprite();
 		playerTwo.SetPosition(1800.0f, 500.0f);
 		playerTwo.SetScale(6.0f, 6.0f);
-	
-		ball.Initialize();
+		
+		// Ball
+		ball.SetTexture();
+		ball.SetSprite();
+		ball.SetPosition(950.0f, 575.0f);
+		ball.SetScale(1.2f, 1.2f);
+		ball.SetInitVelocity(-1.0f, 0.0f);
 
+
+		// Player 1 score
 		player1Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		player1Score.SetText("0");
 		player1Score.SetPosition(700.0f, 0.0f);
 		player1Score.SetCharacterSize(120.0f);
 
+		// Player 2 score
 		player2Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		player2Score.SetText("0");
 		player2Score.SetPosition(1100.0f, 0.0f);

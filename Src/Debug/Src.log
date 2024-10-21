@@ -1,22 +1,6 @@
-﻿  Game.cpp
-C:\VisualStudio\Pong_SFML\Src\Game.cpp(94,63): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
-C:\VisualStudio\Pong_SFML\Src\Game.cpp(94,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-          and
-          [
-              T=float
-          ]
+﻿  Ball.cpp
+C:\VisualStudio\Pong_SFML\Src\Ball.cpp(72,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Game.cpp
 C:\VisualStudio\Pong_SFML\Src\Game.cpp(109,63): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
@@ -35,7 +19,7 @@ C:\VisualStudio\Pong_SFML\Src\Game.cpp(109,51): warning C4244: 'argument': conve
           [
               T=float
           ]
-C:\VisualStudio\Pong_SFML\Src\Game.cpp(245,69): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\VisualStudio\Pong_SFML\Src\Game.cpp(124,63): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -44,7 +28,7 @@ C:\VisualStudio\Pong_SFML\Src\Game.cpp(245,69): warning C4244: 'argument': conve
           [
               T=float
           ]
-C:\VisualStudio\Pong_SFML\Src\Game.cpp(245,57): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\VisualStudio\Pong_SFML\Src\Game.cpp(124,51): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -53,7 +37,7 @@ C:\VisualStudio\Pong_SFML\Src\Game.cpp(245,57): warning C4244: 'argument': conve
           [
               T=float
           ]
-C:\VisualStudio\Pong_SFML\Src\Game.cpp(282,69): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\VisualStudio\Pong_SFML\Src\Game.cpp(260,69): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -62,7 +46,25 @@ C:\VisualStudio\Pong_SFML\Src\Game.cpp(282,69): warning C4244: 'argument': conve
           [
               T=float
           ]
-C:\VisualStudio\Pong_SFML\Src\Game.cpp(282,57): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+C:\VisualStudio\Pong_SFML\Src\Game.cpp(260,57): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\VisualStudio\Pong_SFML\Src\Game.cpp(297,69): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+          and
+          [
+              T=float
+          ]
+C:\VisualStudio\Pong_SFML\Src\Game.cpp(297,57): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=int
@@ -72,5 +74,6 @@ C:\VisualStudio\Pong_SFML\Src\Game.cpp(282,57): warning C4244: 'argument': conve
               T=float
           ]
   Main.cpp
+  Player.cpp
   Generating Code...
   Src.vcxproj -> C:\VisualStudio\Pong_SFML\Src\Debug\Src.exe
