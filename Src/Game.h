@@ -22,7 +22,6 @@ public:
 
 private:
 
-	bool test = false;
 	// Renders 2d objects to the screen
 	sf::RenderWindow *window;
 	unsigned int windowWidth = 1920;
@@ -43,6 +42,10 @@ private:
 
 	// Ball
 	Ball ball;
+	// Random ball direction values
+	float randMin = 0.8f;
+	float randMax = 0.2f;
+	float randMid = 0.1f;
 
 	// Score
 	Score player1Score;

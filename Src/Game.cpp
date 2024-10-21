@@ -1,11 +1,5 @@
 #include "Game.h"
 
-std::random_device rd;
-std::mt19937 gen(rd());
-std::uniform_real_distribution<> negativeDis(-0.8f, -0.2f);
-std::uniform_real_distribution<> positiveDis(0.2f, 0.8f);
-std::uniform_real_distribution<> middleDis(-0.1f, 0.1f);
-
 // Constructor
 Game::Game() :
 	window(window = new sf::RenderWindow(sf::VideoMode(1920, 1080), "SFML works!")), event(event){}
@@ -84,10 +78,7 @@ void Game::Initialize()
 // Updates anything in the window by frame
 void Game::Update()
 {
-	float negativeRandNum = negativeDis(gen);
-	float positiveRandNum = positiveDis(gen);
-	float middleRandNum = middleDis(gen);
-
+	//std::cout << ball.SetRandomBallPos(switchPlayer = true, -1.0f, 3.0f) << std::endl;
 	if (currentScene == MENU)
 	{
 		sf::Vector2i localPos = sf::Mouse::getPosition(*window);
@@ -124,7 +115,6 @@ void Game::Update()
 
 	if (currentScene == GAMEPLAY)
 	{
-
 		// Stops both paddles from going off the window screen
 		player1.ConstrainPaddle();
 		player2.ConstrainPaddle();
@@ -146,17 +136,17 @@ void Game::Update()
 			// if the ball hits the top of paddle, ball will go upwards
 			if (normalizedDifference >= -7.0f && normalizedDifference < 16.0f)
 			{
-				ball.SetVelocity(1.0f, negativeRandNum);
+				ball.SetVelocity(1.0f, ball.SetRandomBallPos(-randMin, -randMax));
 			}
 			// if the ball hits the middle of paddle ball
 			else if (normalizedDifference >= 16.0f && normalizedDifference < 41.0f)
 			{
-				ball.SetVelocity(1.0f, middleRandNum);
+				ball.SetVelocity(1.0f, ball.SetRandomBallPos(-randMid, randMid));
 			}
 			// if the ball hits the bottom of the paddle, ball goes downwards
 			else if (normalizedDifference >= 41.0f && normalizedDifference <= 64)
 			{
-				ball.SetVelocity(1.0f, positiveRandNum);
+				ball.SetVelocity(1.0f, ball.SetRandomBallPos(randMax, randMin));
 			}
 		}
 
@@ -174,17 +164,17 @@ void Game::Update()
 			// if the ball hits the top of paddle, ball will go upwards
 			if (normalizedDifference >= -7.0f && normalizedDifference < 16.0f)
 			{
-				ball.SetVelocity(-1.0f, negativeRandNum);
+				ball.SetVelocity(-1.0f, ball.SetRandomBallPos(-randMin, -randMax));
 			}
 			// if the ball hits the middle of paddle ball
 			else if (normalizedDifference >= 16.0f && normalizedDifference < 41.0f)
 			{
-				ball.SetVelocity(-1.0f, middleRandNum);
+				ball.SetVelocity(-1.0f, ball.SetRandomBallPos(-randMid, randMid));
 			}
 			// if the ball hits the bottom of the paddle, ball goes downwards
 			else if (normalizedDifference >= 41.0f && normalizedDifference <= 64)
 			{
-				ball.SetVelocity(-1.0f, positiveRandNum);
+				ball.SetVelocity(-1.0f, ball.SetRandomBallPos(randMax, randMin));
 			}
 		}
 

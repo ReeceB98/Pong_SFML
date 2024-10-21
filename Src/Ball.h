@@ -1,8 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <random>
 #include "Score.h"
-
 #include "SFML/Graphics.hpp"
 
 class Ball
@@ -33,6 +33,8 @@ public:
 
 	void StartBall(sf::Time time, sf::Clock clock, bool startTime);
 
+	float SetRandomBallPos(float min, float max);
+
 private:
 
 	// Property functions to define the ball sprite
@@ -48,6 +50,7 @@ private:
 
 	sf::Vector2f ballVelocity;
 	sf::Vector2f ballPosition;
+	float speed = 1.0f;
 
 	bool isStarting = true;
 };
