@@ -3,8 +3,7 @@
 
 #include "SFML/Graphics.hpp"
 
-#include "Player1.h"
-#include "Player2.h"
+#include "Player.h"
 #include "Ball.h"
 #include "Score.h"
 #include "Menu.h"
@@ -37,8 +36,8 @@ private:
 	void Render();
 
 	// Paddles
-	Player1 player1;
-	Player2 player2;
+	Player playerOne;
+	Player playerTwo;
 
 	// Ball
 	Ball ball;
