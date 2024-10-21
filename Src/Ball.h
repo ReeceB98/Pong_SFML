@@ -35,14 +35,21 @@ public:
 
 	float SetRandomBallPos(float min, float max);
 
-private:
 
-	// Property functions to define the ball sprite
 	void SetTexture();
 	void SetSprite();
 	//void SetPosition(float x, float y);
 	void SetScale(float x, float y);
 	void SetInitVelocity(float x, float y);
+
+private:
+
+	// Property functions to define the ball sprite
+	//void SetTexture();
+	//void SetSprite();
+	////void SetPosition(float x, float y);
+	//void SetScale(float x, float y);
+	//void SetInitVelocity(float x, float y);
 
 	// Variables
 	sf::Texture* texture;
