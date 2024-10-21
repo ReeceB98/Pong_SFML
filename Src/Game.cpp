@@ -58,9 +58,17 @@ void Game::Initialize()
 		playerTwoWins.SetCharacterSize(120);
 		playerTwoWins.SetPosition(300.0f, 200.0f);
 		playerTwoWins.SetTextColour(sf::Color::Transparent);
+
+		playerOne.SetTexture("C:/VisualStudio/Pong_SFML/Src/Paddle.png");
+		playerOne.SetSprite();
+		playerOne.SetPosition(100.0f, 500.0f);
+		playerOne.SetScale(6.0f, 6.0f);
+
+		playerTwo.SetTexture("C:/VisualStudio/Pong_SFML/Src/Paddle.png");
+		playerTwo.SetSprite();
+		playerTwo.SetPosition(1800.0f, 500.0f);
+		playerTwo.SetScale(6.0f, 6.0f);
 	
-		player1.Initialize();
-		player2.Initialize();
 		ball.Initialize();
 
 		player1Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
@@ -78,7 +86,6 @@ void Game::Initialize()
 // Updates anything in the window by frame
 void Game::Update()
 {
-	//std::cout << ball.SetRandomBallPos(switchPlayer = true, -1.0f, 3.0f) << std::endl;
 	if (currentScene == MENU)
 	{
 		sf::Vector2i localPos = sf::Mouse::getPosition(*window);
@@ -116,22 +123,22 @@ void Game::Update()
 	if (currentScene == GAMEPLAY)
 	{
 		// Stops both paddles from going off the window screen
-		player1.ConstrainPaddle();
-		player2.ConstrainPaddle();
+		playerOne.ConstrainPaddle(true, false);
+		playerTwo.ConstrainPaddle(false, true);
 
 		// Ball movements updated each frame
 		ball.Move(*window);
 
 		// Checks collision between player 1 and ball
-		if (ball.BallBounds().intersects(player1.PaddleBounds()))
+		if (ball.BallBounds().intersects(playerOne.PaddleBounds()))
 		{
 			// Find the centers of player 1 paddle and ball
-			float paddleCenter = player1.GetPosition().y + player1.GetScale().y / 2.0f;
+			float paddleCenter = playerOne.GetPosition().y + playerOne.GetScale().y / 2.0f;
 			float ballCenter = ball.GetPosition().y + ball.GetScale().y;
 
 			// Find the difference of the centers and normalize
 			float difference = ballCenter - paddleCenter;
-			float normalizedDifference = difference / (player1.GetScale().x / 2.0f);
+			float normalizedDifference = difference / (playerOne.GetScale().x / 2.0f);
 
 			// if the ball hits the top of paddle, ball will go upwards
 			if (normalizedDifference >= -7.0f && normalizedDifference < 16.0f)
@@ -151,15 +158,15 @@ void Game::Update()
 		}
 
 		// Checks collision between player 2 and ball
-		if (ball.BallBounds().intersects(player2.PaddleBounds()))
+		if (ball.BallBounds().intersects(playerTwo.PaddleBounds()))
 		{
 			// Find the centers of player 2 paddle and ball
-			float paddleCenter = player2.GetPosition().y + player2.GetScale().y / 2.0f;
+			float paddleCenter = playerTwo.GetPosition().y + playerTwo.GetScale().y / 2.0f;
 			float ballCenter = ball.GetPosition().y + ball.GetScale().y;
 
 			// Find the difference of the centers and normalize
 			float difference = ballCenter - paddleCenter;
-			float normalizedDifference = difference / (player2.GetScale().x / 2.0f);
+			float normalizedDifference = difference / (playerTwo.GetScale().x / 2.0f);
 
 			// if the ball hits the top of paddle, ball will go upwards
 			if (normalizedDifference >= -7.0f && normalizedDifference < 16.0f)
@@ -185,8 +192,8 @@ void Game::Update()
 			ball.SetBallVelocity(0.0f, 0.0f);
 			ball.SetPosition(950.0f, 500.0f);
 			player2Scored = true;
-			player1.SetPosition(100.0f, 500.0f);
-			player2.SetPosition(1800.0f, 500.0f);
+			playerOne.SetPosition(100.0f, 500.0f);
+			playerTwo.SetPosition(1800.0f, 500.0f);
 			clock.restart();
 		}
 		else if (ball.GetPosition().x >= 1920)
@@ -195,8 +202,8 @@ void Game::Update()
 			ball.SetBallVelocity(0.0f, 0.0f);
 			ball.SetPosition(950.0f, 500.0f);
 			player1Scored = true;
-			player1.SetPosition(100.0f, 500.0f);
-			player2.SetPosition(1800.0f, 500.0f);
+			playerOne.SetPosition(100.0f, 500.0f);
+			playerTwo.SetPosition(1800.0f, 500.0f);
 			clock.restart();
 		}
 
@@ -227,10 +234,10 @@ void Game::Update()
 			playAgainButton.SetTextColour(sf::Color::White);
 
 			ball.SetVelocity(0.0f, 0.0f);
-			player1.SetPosition(100.0f, 500.0f);
-			player1.SetSpeed(0.0f);
-			player2.SetPosition(1800.0f, 500.0f);
-			player2.SetSpeed(0.0f);
+			playerOne.SetPosition(100.0f, 500.0f);
+			playerOne.SetSpeed(0.0f);
+			playerTwo.SetPosition(1800.0f, 500.0f);
+			playerTwo.SetSpeed(0.0f);
 
 			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
 
@@ -248,8 +255,8 @@ void Game::Update()
 					player1Score.ResetScore();
 					player2Score.ResetScore();
 					ball.SetVelocity(-1.0f, 0.0f);
-					player1.SetSpeed(1.0f);
-					player2.SetSpeed(1.0f);
+					playerOne.SetSpeed(1.0f);
+					playerTwo.SetSpeed(1.0f);
 				}
 			}
 			else
@@ -264,10 +271,10 @@ void Game::Update()
 			playAgainButton.SetTextColour(sf::Color::White);
 
 			ball.SetVelocity(0.0f, 0.0f);
-			player1.SetPosition(100.0f, 500.0f);
-			player1.SetSpeed(0.0f);
-			player2.SetPosition(1800.0f, 500.0f);
-			player2.SetSpeed(0.0f);
+			playerOne.SetPosition(100.0f, 500.0f);
+			playerOne.SetSpeed(0.0f);
+			playerTwo.SetPosition(1800.0f, 500.0f);
+			playerTwo.SetSpeed(0.0f);
 
 			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
 
@@ -285,8 +292,8 @@ void Game::Update()
 					player1Score.ResetScore();
 					player2Score.ResetScore();
 					ball.SetVelocity(-1.0f, 0.0f);
-					player1.SetSpeed(1.0f);
-					player2.SetSpeed(1.0f);
+					playerOne.SetSpeed(1.0f);
+					playerTwo.SetSpeed(1.0f);
 				}
 			}
 			else
@@ -311,20 +318,20 @@ void Game::HandleInputs()
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-			player1.MoveUp();
+			playerOne.MoveUp();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 		{
-			player1.MoveDown();
+			playerOne.MoveDown();
 		}
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			player2.MoveUp();
+			playerTwo.MoveUp();
 		}
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			player2.MoveDown();
+			playerTwo.MoveDown();
 		}
 	}
 }
@@ -343,8 +350,8 @@ void Game::Render()
 
 	if (currentScene == GAMEPLAY)
 	{
-		player1.Render(*window);
-		player2.Render(*window);
+		playerOne.Render(*window);
+		playerTwo.Render(*window);
 		ball.Render(*window);
 		player1Score.Render(*window);
 		player2Score.Render(*window);
