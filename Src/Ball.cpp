@@ -59,6 +59,20 @@ void Ball::StartBall(sf::Time time, sf::Clock clock, bool startTime)
 	}
 }
 
+float Ball::SetRandomBallPos(float min, float max)
+{
+	// Generates a random number seed
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	// Set the min & max number for number generator seed
+	std::uniform_real_distribution<> dis(min, max);
+
+	// return random float number to set the ball direction
+	float randNum = dis(gen);
+	return randNum;
+}
+
 void Ball::SetScale(float x, float y)
 {
 	sprite->setScale(x, y);
@@ -67,8 +81,8 @@ void Ball::SetScale(float x, float y)
 // Initial velocity at start up
 void Ball::SetInitVelocity(float x, float y)
 {
-	ballVelocity.x = x;
-	ballVelocity.y = y;
+	ballVelocity.x = x * speed;
+	ballVelocity.y = y * speed;
 }
 
 // Moves the ball across the screen
