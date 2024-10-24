@@ -263,13 +263,20 @@ void Game::Update()
 			playerOneWins.SetTextColour(sf::Color::White);
 			playAgainButton.SetTextColour(sf::Color::White);
 
+			// Ball stops to pause the game briefly
 			ball.SetVelocity(0.0f, 0.0f);
+
+			// Player 1 position and speed resetted
 			playerOne.SetPosition(100.0f, 500.0f);
 			playerOne.SetSpeed(0.0f);
+
+			// Player 2 position and speed resetted
 			playerTwo.SetPosition(1800.0f, 500.0f);
 			playerTwo.SetSpeed(0.0f);
 
+			// Get the mouse position to use for the play again button
 			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
+
 
 			if (playAgainButton.GetTextBounds().contains(localPos.x, localPos.y))
 			{
