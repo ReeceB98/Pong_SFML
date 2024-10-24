@@ -12,16 +12,6 @@ Ball::~Ball()
 	delete sprite;
 }
 
-// Initialize all properties to define the ball sprite
-void Ball::Initialize()
-{
-	SetTexture();
-	SetSprite();
-	SetPosition(950, 575);
-	SetScale(1.2f, 1.2f);
-	SetInitVelocity(-1.0f, 0.0f);
-}
-
 // Sets the texture for the ball sprite from file
 void Ball::SetTexture()
 {
@@ -90,17 +80,6 @@ void Ball::Move(sf::RenderWindow& window)
 {
 	// Get the balls position each frame
 	ballPosition = sprite->getPosition();
-
-	// Detects if the ball hit the left or right side of the wall
-	// Will bounce if collision happens
-	//if (ballPosition.x <= 0.0f)
-	//{
-	//	ballVelocity.x = -ballVelocity.x;
-	//}
-	//else if (ballPosition.x >= 1920.0f)
-	//{
-	//	ballVelocity.x = -ballVelocity.x;
-	//}
 
 	// Detects if the ball hit the top or bottom of the wall
 	// Will bounce if collision happens
