@@ -84,7 +84,6 @@ void Game::Initialize()
 		ball.SetScale(1.2f, 1.2f);
 		ball.SetInitVelocity(-1.0f, 0.0f);
 
-
 		// Player 1 score
 		player1Score.SetFont("C:/VisualStudio/Pong_SFML/Src/digitalix.ttf");
 		player1Score.SetText("0");
@@ -202,27 +201,42 @@ void Game::Update()
 		}
 
 		// Updates the score based on which player has scored
-		if (ball.GetPosition().x <= 0.0f)
+		if (ball.GetPosition().x <= minScreenWidth)
 		{
+			// Player One Values.
+			playerOne.SetPosition(100.0f, 500.0f);
+
+			// Player Two Values
+			player2Scored = true;
+			playerTwo.SetPosition(1800.0f, 500.0f);
 			player2Score.SetScore();
+
+			// Ball Values
 			ball.SetBallVelocity(0.0f, 0.0f);
 			ball.SetPosition(950.0f, 500.0f);
-			player2Scored = true;
-			playerOne.SetPosition(100.0f, 500.0f);
-			playerTwo.SetPosition(1800.0f, 500.0f);
+
+			// Restart the clock back to zero
 			clock.restart();
 		}
-		else if (ball.GetPosition().x >= 1920)
+		else if (ball.GetPosition().x >= maxScreenWidth)
 		{
+			// Player 1 Values
 			player1Score.SetScore();
-			ball.SetBallVelocity(0.0f, 0.0f);
-			ball.SetPosition(950.0f, 500.0f);
 			player1Scored = true;
 			playerOne.SetPosition(100.0f, 500.0f);
+
+			// Player 2 Values
 			playerTwo.SetPosition(1800.0f, 500.0f);
+
+			// Ball Values
+			ball.SetBallVelocity(0.0f, 0.0f);
+			ball.SetPosition(950.0f, 500.0f);
+
+			// Restart clock for the next game
 			clock.restart();
 		}
 
+		// These conditions pauses the game and sets direction of ball based on who scored 
 		if (player1Scored)
 		{
 			time = clock.getElapsedTime();
@@ -249,13 +263,20 @@ void Game::Update()
 			playerOneWins.SetTextColour(sf::Color::White);
 			playAgainButton.SetTextColour(sf::Color::White);
 
+			// Ball stops to pause the game briefly
 			ball.SetVelocity(0.0f, 0.0f);
+
+			// Player 1 position and speed resetted
 			playerOne.SetPosition(100.0f, 500.0f);
 			playerOne.SetSpeed(0.0f);
+
+			// Player 2 position and speed resetted
 			playerTwo.SetPosition(1800.0f, 500.0f);
 			playerTwo.SetSpeed(0.0f);
 
+			// Get the mouse position to use for the play again button
 			sf::Vector2i localPos = sf::Mouse::getPosition(*window);
+
 
 			if (playAgainButton.GetTextBounds().contains(localPos.x, localPos.y))
 			{

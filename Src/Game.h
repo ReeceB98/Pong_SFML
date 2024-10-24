@@ -50,15 +50,19 @@ private:
 	Score player1Score;
 	Score player2Score;
 
+	// Game scene selection
 	int currentScene = 0;
 	enum sceneName {MENU, GAMEPLAY, ENDSCREEN};
 
+	// Used to help with delay gameplay
 	sf::Clock clock;
 	sf::Time time;
 
+	// A check to see which player has scored
 	bool player1Scored = false;
 	bool player2Scored = false;
 
+	// All the text that is displayed in the game
 	Menu title;
 	Menu playButton;
 	Menu quitButton;
@@ -66,6 +70,11 @@ private:
 	Menu playerTwoWins;
 	Menu playAgainButton;
 
+	// Trigger the timer after the game has paused for limited time
 	bool startTimer = false;
+
+	// Screen width variables
+	float minScreenWidth = 0.0f;
+	float maxScreenWidth = 1920.0f;
 };
 
